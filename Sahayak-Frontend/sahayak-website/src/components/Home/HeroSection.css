@@ -1,0 +1,20 @@
+
+
+@media(max-width:1370px){
+    .hero-container{
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-main{
+        margin-left: 0px;
+    }
+    .story-card{
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    /* .hero-content{
+        display:none
+    } */
+}
+

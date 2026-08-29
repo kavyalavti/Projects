@@ -1,0 +1,97 @@
+syntax = "proto2";
+
+package com.sahayak;
+
+option java_multiple_files = true;
+option java_package = "com.sahayak.proto.model.payment";
+
+message PaymentInitiateRequest {
+//  optional int64 campaignId = 1;
+  optional double amount = 1;
+  optional string currency = 2;
+  optional string paymentGateway = 3;
+  optional string callbackUrl = 4;
+  map<string, string> metadata = 5;
+  optional PaymentStatus status = 6;
+  optional string created_at = 7;
+  optional double amountInRupees = 8;
+}
+
+message PaymentInitiateResponse {
+  optional int64 donationId = 1;
+  optional double amount = 2;
+  optional string currency = 3;
+  optional string paymentGatewayUrl = 4;
+  optional string expiresTime = 5;
+  optional string signature = 6;
+}
+
+enum PaymentMethod {
+  METHOD_UNSPECIFIED = 0;
+  METHOD_CREDIT_CARD = 1;
+  METHOD_DEBIT_CARD = 2;
+  METHOD_NET_BANKING = 3;
+  METHOD_UPI = 4;
+  METHOD_WALLET = 5;
+}
+
+enum PaymentGateway {
+  UNSPECIFIED = 0;
+  TESTING = 1;
+  PAYTM = 2;
+}
+
+enum PaymentStatus {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_PENDING = 1;
+  STATUS_SUCCESS = 2;
+  STATUS_FAILED = 3;
+  STATUS_REFUNDED = 4;
+}
+
+message PaymentStatusResponse {
+  optional int64 donationId = 1;
+  optional int64 campaignId = 2;
+  optional int64 userId = 3;
+  optional double amount = 4;
+  optional string currency = 5;
+  optional int32 status = 6;
+  optional PaymentMethod paymentMethod = 7;
+  optional string transactionId = 8;
+  optional string initiatedTime = 9;
+  optional string paymentTime = 10;
+  map<string, string> metadata = 11;
+}
+
+
+
+message PaymentWebhookRequest {
+  optional int64 donationId = 1;
+  optional int64 campaignId = 2;
+  optional string transactionId = 3;
+  optional double amount = 4;
+  optional string currency = 5;
+  optional string status = 6;
+  optional string paymentMethod = 7;
+  optional string paymentTime = 8;
+}
+
+
+message PaymentWebhookResponse {
+  optional string status = 1;           // "SUCCESS" or "FAILED"
+  optional string message = 2;          // Informational message
+  optional string processedAt = 3;      // Timestamp when the webhook was processed
+}
+
+message DonationDTO {
+  optional int64 donationId = 1;
+  optional int64 userId = 2;
+  optional int64 campaignId = 3;
+  optional double amount = 4;
+  optional string currency = 5;
+  optional PaymentMethod paymentMethod = 6;
+  optional string transactionId = 7;
+  optional string initiatedTime = 8;
+  optional string paymentTime = 9;
+  optional PaymentStatus status = 10;
+}

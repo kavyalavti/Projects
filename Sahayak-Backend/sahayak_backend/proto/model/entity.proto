@@ -1,0 +1,126 @@
+syntax = "proto2";
+
+package com.sahayak;
+
+option java_multiple_files = true;
+option java_package = "com.sahayak.proto.model.entity";
+
+message UserDTO {
+  optional int64 id = 1;
+  optional string name = 2;
+  optional string email = 3;
+  optional string password = 4;
+  optional string phoneNumber = 5;
+  optional int64 role = 6;
+}
+
+enum UserRole {
+  PATIENT =1;
+  USER=2;
+}
+
+message RegisterDTO {
+  required string name = 1;
+  required string email = 2;
+  required string phoneNumber = 3;
+}
+
+message OtpRequest{
+  required string userName = 1;
+  required string phoneNumber = 2;
+}
+enum OtpStatus{
+  DELIVERED =1;
+  FAILED = 2;
+}
+message OtpResponse{
+  required OtpStatus otpStatus = 1;
+  required string message = 2;
+}
+
+message OtpValidationRequest{
+  required string userName = 1;
+  required string phoneNumber = 2;
+  required string otpNumber = 3;
+}
+enum OtpValidationStatus{
+    SUCCESS = 1;
+    FAIL = 2;
+}
+message OtpValidationResponse {
+  required OtpValidationStatus otpValidationStatus= 1;
+  required string message = 2;
+}
+
+message AuthRequest {
+  required string userName = 1;
+  required string password = 2;
+}
+
+message AuthResponse {
+  required string token = 1;
+  required string message = 2;
+  required int64 userId = 3;
+}
+
+
+message CampaignDTO {
+  optional int64 id = 1;
+  optional int64 userId = 2;
+  optional string patientName = 3;
+  optional string relation = 4;
+  optional int32 patientAge = 5;
+  optional string patientAddress = 6;
+  optional string state = 7;
+  optional string city = 8;
+  optional string disease = 9;
+  optional string hospital = 10;
+  optional string doctor = 11;
+  optional string startDate = 12;
+  optional int32 duration = 13;
+  optional double totalMedicalCost = 14;
+  optional double totalAmount = 15;
+  optional string endDate = 16;
+  optional string aadhaarPath = 17;
+  optional string panPath = 18;
+  optional string medicalReportPath = 19;
+  optional string description = 20;
+  optional CampaignStatus status = 21;
+  optional double amountRaised = 22;
+  optional string campaignUrl = 23;
+  optional string coverImagePath = 24;
+  optional string createdAt = 25;
+  optional string updatedAt = 26;
+  optional string story = 27;
+}
+
+enum CampaignStatus {
+  UNDER_VERIFICATION = 1;
+  ACTIVE = 2;
+  REJECTED = 3;
+  COMPLETED = 4;
+}
+
+message NotificationDTO {
+  optional int64 id = 1;
+  optional int64 userId = 2;
+  optional NotificationType type = 3;
+  optional NotificationStatus status = 4;
+  optional string message = 5;
+  optional string createdAt = 6;
+}
+enum NotificationType {
+  DONATION_RECEIVED = 1;
+  CAMPAIGN_APPROVED = 2;
+  PROFILE_VERIFIED = 3;
+}
+enum NotificationStatus {
+  UNDELIVERED = 1;
+  DELETED = 2;
+  NOT_READ = 3;
+  READ = 4;
+}
+
+
+
+

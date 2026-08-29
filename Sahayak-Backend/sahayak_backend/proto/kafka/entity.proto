@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package com.sahayak;
+
+option java_multiple_files = true;
+option java_package = "com.sahayak.proto.kafka.entity";
+
+message CampaignCreatedEvent {
+  optional int64 userId = 1;
+  optional int64 campaignId = 2;
+}
